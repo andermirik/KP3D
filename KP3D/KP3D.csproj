@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="cat.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ara3D.Math3D" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Solver.Foundation" Version="3.1.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="cat.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="trlib\third_party\" />
+  </ItemGroup>
+
+</Project>
