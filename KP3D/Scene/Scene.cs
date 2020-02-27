@@ -2,10 +2,12 @@
 using KP3D.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace KP3D.Scene
 {
@@ -13,7 +15,7 @@ namespace KP3D.Scene
     {
         public Camera camera;
         public List<Shape> shapes;
-        public Vector3 light_dir = new Vector3(1, 1, 1).Normalize();
+        public Vector3 light_dir = new Vector3(0, 0, 1).Normalize();
 
         public class Shape
         {
@@ -49,31 +51,17 @@ namespace KP3D.Scene
                 this.fov = fov;
             }
 
-            public float longitude = 0;
-            public float latitude = 0;
+            public float pitch = 0;
+            public float yaw = 0;
             public void OnMouseMove(int deltaX, int deltaY)
             {
                 //изменяем широту и долготу
-                longitude = longitude + deltaX * 0.05f; //долгота, фи
-                latitude = latitude + deltaY * 0.05f; //широта, тэта
-                                                    //ограничиваем широту(тэта)
-                //if (latitude > (float)Math.PI / 2) latitude = (float)Math.PI / 2;
-                //if (latitude < -(float)Math.PI / 2) latitude = -(float)Math.PI / 2;
-                
-            }
-            public void gen_eye(int r)
-            {
-                float x = r * (float)(Math.Cos(latitude) * Math.Cos(longitude));
-                float y = r * (float)(Math.Sin(latitude) * Math.Sin(longitude));
-                float z = r * (float)Math.Cos(latitude);
-                eye = new Vector3(y, x, 100);
-            }
-            public void gen_center(int r)
-            {
-                float x = r * (float)(Math.Cos(latitude) * Math.Cos(longitude));
-                float y = r * (float)(Math.Sin(latitude) * Math.Sin(longitude));
-                float z = r * (float)Math.Cos(latitude);
-                center = new Vector3(y, x, 100);
+                pitch = pitch + deltaX * 0.05f; //долгота, фи
+                yaw = yaw + deltaY * 0.05f; //широта, тэта
+
+                //if (pitch > (float)Math.PI / 2) pitch = (float)Math.PI / 2;
+                //if (yaw < -(float)Math.PI / 2) yaw = -(float)Math.PI / 2;
+
             }
         }
 
@@ -104,12 +92,18 @@ namespace KP3D.Scene
                 for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
                 {
                     // calculate new pixel value
-                    pixels[currentLine + x] = (byte)30;
-                    pixels[currentLine + x + 1] = (byte)30;
-                    pixels[currentLine + x + 2] = (byte)30;
+                    pixels[currentLine + x] = (byte)225;
+                    pixels[currentLine + x + 1] = (byte)225;
+                    pixels[currentLine + x + 2] = (byte)225;
                 }
             }
 
+            float[] zbuffer = new float[width * height];
+            for (int j = 0; j < width * height; j++)
+                zbuffer[j] = -0xFFFFFFFF;
+
+            bool first_time = false;
+            again:
             for (int i = 0; i < shapes.Count; i++)
             {
 
@@ -122,17 +116,19 @@ namespace KP3D.Scene
                 var Scale = MyMath.MyMatrix4x4.CreateScale(shapes[i].scale_x, shapes[i].scale_y, shapes[i].scale_z);
                 var TL = MyMath.MyMatrix4x4.CreateTranslation(shapes[i].dx, shapes[i].dy, shapes[i].dz);
                 var W = TL * Rot * Scale;
-                var V = MyMath.MyMatrix4x4.CreateLookAt(camera.eye, camera.center, new Vector3(0, 1, 0));
-                var P = MyMath.MyMatrix4x4.CreateProjectionFOV(camera.fov, 0.01f, 100);
-                var VP = MyMath.MyMatrix4x4.CreateViewPort(width / 8, width / 8, width, height, 1);
+
+                //var V = MyMath.MyMatrix4x4.CreateJRALookAt(camera.eye, camera.center, new Vector3(0, 1, 0));
+                //var V = MyMath.MyMatrix4x4.CreateLookAt(camera.eye, camera.center, new Vector3(0, 1, 0));
+
+                var V = MyMath.MyMatrix4x4.CreateFPSLookAt(camera.eye, camera.pitch, camera.yaw);
+                var P = MyMath.MyMatrix4x4.CreateProjectionFOV(camera.fov, width / height, 0.01f, 1000);
                 var WVP = P * V * W;
                 Random rnd = new Random(228);
 
-                float[] zbuffer = new float[width * height];
-                for (int j = 0; j < width * height; j++)
-                    zbuffer[j] = -0xFFFFFFFF;
 
-                for (int j = 0; j < shapes[i].triangles.Count; j++)
+                Object _lock = new Object();
+                Parallel.For(0, shapes[i].triangles.Count, new ParallelOptions { MaxDegreeOfParallelism = 16 }, j =>
+                //for (int j = 0; j < shapes[i].triangles.Count; j++)
                 {
                     var p0 = MyMath.MyMatrix4x1.FromPoint4x1(shapes[i].triangles[j].a);
                     var p1 = MyMath.MyMatrix4x1.FromPoint4x1(shapes[i].triangles[j].b);
@@ -142,13 +138,48 @@ namespace KP3D.Scene
                     var t2 = MyMath.MyMatrix4x1.ToPoint(WVP * p1);
                     var t3 = MyMath.MyMatrix4x1.ToPoint(WVP * p2);
 
-                    Vector3 intensivity = shapes[i].triangles[j].normal * light_dir;
-                    intensivity = new Vector3(1, 1, 1);
-                    Render.p_triangle_old(t1, t2, t3, intensivity.X, intensivity.Y, intensivity.Z, pixels, bitmapData, bytesPerPixel, bm.Height, bm.Width, Render.color(rnd.Next(255, 255), 0, 0), zbuffer);
-                    //Render.triangle(new Vector3[] { t1, t2, t3 }, zbuffer, bm, Render.color(rnd.Next(0, 128), 0, 0));
-                    //Render.line((int)t1.X, (int)t1.Y, (int)t2.X, (int)t2.Y, bm, Render.color(255, 0, 0));
-                    //Render.line((int)t2.X, (int)t2.Y, (int)t3.X, (int)t3.Y, bm, Render.color(255, 0, 0));
-                    //Render.line((int)t1.X, (int)t1.Y, (int)t3.X, (int)t3.Y, bm, Render.color(255, 0, 0));
+                    var intensivity = 0.5 + 0.5 * Math.Abs(shapes[i].triangles[j].normal.Normalize().Z);
+
+                    //Debug.WriteLine("normal = "+shapes[i].triangles[j].normal);
+                    //Debug.WriteLine("light dir = "+light_dir);
+                    //Debug.WriteLine("intensivity = " + intensivity);
+                    //intensivity = 1;
+
+                    //var main_color = Render.color(255, 255, 255);
+                    var main_color = Render.color(255, 153, 153);
+                    var color_lines = Render.color(0, 0, 0);
+
+                    var clr = Render.color(
+                        (int)(main_color.R * intensivity),
+                        (int)(main_color.G * intensivity),
+                        (int)(main_color.B * intensivity)
+                        );
+                    lock (_lock)
+                    {
+                        Render.AndYetAnotherMemesSavedTheWorld(t1, t2, t3, clr, zbuffer, pixels, bitmapData, bytesPerPixel);
+                        //Render.DrawTriangle(t1, t2, t3, clr, zbuffer, pixels, bitmapData, bytesPerPixel);
+                    }
+                    //Render.p_triangle_old(t1, t2, t3, (float)intensivity, (float)intensivity, (float)intensivity, pixels, bitmapData, bytesPerPixel, height, width, clr, zbuffer);
+                    //Render.AndYetAnotherMemesSavedTheWorld(t1, t2, t3, clr, zbuffer, pixels, bitmapData, bytesPerPixel);
+                    //Render.DrawLine((int)t1.X+width/2, (int)t1.Y + height/2, (int)t1.Z, (int)t2.X+width/2, (int)t2.Y + height/2, t2.Z, color_lines, pixels, bitmapData, bytesPerPixel, null);
+                    //Render.DrawLine((int)t1.X+width/2, (int)t1.Y + height / 2, (int)t1.Z, (int)t3.X+width/2, (int)t3.Y + height/2, t3.Z, color_lines, pixels, bitmapData, bytesPerPixel, null);
+                    //Render.DrawLine((int)t3.X+width/2, (int)t3.Y + height / 2, (int)t3.Z, (int)t2.X+width/2, (int)t2.Y + height/2, t2.Z, color_lines, pixels, bitmapData, bytesPerPixel, null);
+                }
+                );
+                if (first_time == true) {
+                    for (int y = 0; y < heightInPixels; y++)
+                    {
+                        int currentLine = y * bitmapData.Stride;
+                        for (int x = 0; x < widthInBytes; x = x + bytesPerPixel)
+                        {
+                            // calculate new pixel value
+                            pixels[currentLine + x] = (byte)225;
+                            pixels[currentLine + x + 1] = (byte)225;
+                            pixels[currentLine + x + 2] = (byte)225;
+                        }
+                    }
+                    first_time = false;
+                    goto again;
                 }
             }
             Marshal.Copy(pixels, 0, ptrFirstPixel, pixels.Length);

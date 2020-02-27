@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lnk\\Documents\\GitHub\\KP3D\\KP3D\\KP3D.csproj": {}
+    "C:\\Users\\Lnk\\Desktop\\Hub\\учеба\\курсач 3D\\KP3D\\KP3D\\KP3D.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lnk\\Documents\\GitHub\\KP3D\\KP3D\\KP3D.csproj": {
+    "C:\\Users\\Lnk\\Desktop\\Hub\\учеба\\курсач 3D\\KP3D\\KP3D\\KP3D.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lnk\\Documents\\GitHub\\KP3D\\KP3D\\KP3D.csproj",
+        "projectUniqueName": "C:\\Users\\Lnk\\Desktop\\Hub\\учеба\\курсач 3D\\KP3D\\KP3D\\KP3D.csproj",
         "projectName": "KP3D",
-        "projectPath": "C:\\Users\\Lnk\\Documents\\GitHub\\KP3D\\KP3D\\KP3D.csproj",
+        "projectPath": "C:\\Users\\Lnk\\Desktop\\Hub\\учеба\\курсач 3D\\KP3D\\KP3D\\KP3D.csproj",
         "packagesPath": "C:\\Users\\Lnk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lnk\\Documents\\GitHub\\KP3D\\KP3D\\obj\\",
+        "outputPath": "C:\\Users\\Lnk\\Desktop\\Hub\\учеба\\курсач 3D\\KP3D\\KP3D\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lnk\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,6 +41,10 @@
             "Ara3D.Math3D": {
               "target": "Package",
               "version": "[1.0.0, )"
+            },
+            "Extended.Wpf.Toolkit": {
+              "target": "Package",
+              "version": "[3.8.1, )"
             },
             "Microsoft.Solver.Foundation": {
               "target": "Package",

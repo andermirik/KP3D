@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Ara3D.Math3D" Version="1.0.0" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.8.1" />
     <PackageReference Include="Microsoft.Solver.Foundation" Version="3.1.0" />
     <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
