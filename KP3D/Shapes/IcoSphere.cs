@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KP3D.Shapes
 {
-    class IcoSphere : Scene.Scene.Shape
+    class IcoSphere : Scene.Shape
     {
 
         public IcoSphere(int level = 3)

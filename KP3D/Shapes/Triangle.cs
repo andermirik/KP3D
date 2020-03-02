@@ -6,7 +6,7 @@ using System.Text;
 
 namespace KP3D.Shapes
 {
-    class MyTriangle
+    public class MyTriangle
     {
         public Vector3 a;
         public Vector3 b;

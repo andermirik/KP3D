@@ -34,3 +34,5 @@ C:\Users\Lnk\Desktop\Hub\учеба\курсач 3D\KP3D\KP3D\bin\Debug\netcorea
 C:\Users\Lnk\Desktop\Hub\учеба\курсач 3D\KP3D\KP3D\bin\Debug\netcoreapp3.1\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Lnk\Desktop\Hub\учеба\курсач 3D\KP3D\KP3D\bin\Debug\netcoreapp3.1\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Lnk\Desktop\Hub\учеба\курсач 3D\KP3D\KP3D\bin\Debug\netcoreapp3.1\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Lnk\Desktop\Hub\учеба\курсач 3D\KP3D\KP3D\obj\Debug\netcoreapp3.1\App.baml
+C:\Users\Lnk\Desktop\Hub\учеба\курсач 3D\KP3D\KP3D\obj\Debug\netcoreapp3.1\Buttons.baml

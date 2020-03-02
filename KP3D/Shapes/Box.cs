@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KP3D.Shapes
 {
-    class Box : Scene.Scene.Shape
+    class Box : Scene.Shape
     {
         public Box()
         {
@@ -15,7 +15,6 @@ namespace KP3D.Shapes
         }
         public void ToTriangles()
         {
-
             //нижняя грань
             triangles.Add(new MyTriangle(
                 new Vector3(-0.5f, -0.5f, -0.5f),
@@ -70,7 +69,6 @@ namespace KP3D.Shapes
                new Vector3(0.5f, -0.5f, -0.5f)
                )
            );
-
             //передняя грань
             triangles.Add(new MyTriangle(
                new Vector3(-0.5f, 0.5f, -0.5f),

@@ -82,20 +82,20 @@ namespace KP3D.MyMath
 
             MyMatrix4x4 view = new MyMatrix4x4();
             view.points[0, 0] = xaxis.X;
-            view.points[1, 0] = xaxis.Y;
-            view.points[2, 0] = xaxis.Z;
-            view.points[3, 0] = xaxis.Dot(-eye);
+            view.points[0, 1] = xaxis.Y;
+            view.points[0, 2] = xaxis.Z;
+            view.points[0, 3] = -xaxis.Dot(eye);
 
-            view.points[0, 1] = yaxis.X;
+            view.points[1, 0] = yaxis.X;
             view.points[1, 1] = yaxis.Y;
-            view.points[2, 1] = yaxis.Z;
-            view.points[3, 1] = yaxis.Dot(-eye);
+            view.points[1, 2] = yaxis.Z;
+            view.points[1, 3] = -yaxis.Dot(eye);
 
-            view.points[0, 2] = zaxis.X;
-            view.points[1, 2] = zaxis.Y;
+            view.points[2, 0] = zaxis.X;
+            view.points[2, 1] = zaxis.Y;
             view.points[2, 2] = zaxis.Z;
-            view.points[3, 2] = zaxis.Dot(-eye);
-            return view;
+            view.points[2, 3] = -zaxis.Dot(eye);
+            return view;// * MyMath.MyMatrix4x4.CreateTranslation(eye.X, eye.Y, eye.Z);
         }
 
         public static MyMatrix4x4 CreateJRALookAt(Vector3 eye, Vector3 center, Vector3 up)
@@ -156,12 +156,6 @@ namespace KP3D.MyMath
             return view;
         }
 
-        // t0 is a vector which represents the distance to move the camera away
-        //    from the object to ensure the object is in view.
-        // r  is a rotation quaternion which rotates the camera 
-        //    around the object being observed.
-        // t1 is an optional vector which represents the position of the object in the world.
-
         MyMatrix4x4 CreateArcballView(Vector3 t0, float anglex, float angley, float anglez, Vector3 t1)
         {
             MyMatrix4x4 T0 = CreateTranslation(t0.X, t0.Y, t0.Z); // Translation away from object.
@@ -173,20 +167,36 @@ namespace KP3D.MyMath
             // return viewMatrix;
             return null;
         }
-
-        public static MyMatrix4x4 CreateProjectionFOV(float angleOfView, float aspect, float near, float far)
+        public static MyMatrix4x4 CreateProjection(float left, float right, float bottom, float top, float near, float far)
+        {
+            MyMatrix4x4 temp = new MyMatrix4x4();
+            temp.points[0,0] = 2 * near / (right - left);
+            temp.points[1,1] = 2 * near / (top - bottom);
+            temp.points[2,2] = -(far + near) / (far - near);
+            temp.points[2,3] = -1;
+            temp.points[3,2] = -2 * far * near / (far - near);
+            temp.points[2,0] = (right + left) / (right - left);
+            temp.points[2,1] = (top + bottom) / (top - bottom);
+            temp.points[3,3] = 0;
+            
+            return temp;
+        }
+        public static MyMatrix4x4 CreateProjectionFOV(float fov, float aspect, float near, float far)
         {
             MyMatrix4x4 temp = new MyMatrix4x4();
 
-            float frustumDepth = far - near;
-            float oneOverDepth = 1 / frustumDepth;
+            temp.points[0, 0] = (1 / (float)Math.Tan(fov / 2)) / aspect;
+            temp.points[1, 1] = 1 / (float)Math.Tan(fov / 2);
 
-            temp.points[1, 1] = 1 / (float)Math.Tan(0.5f * angleOfView);
-            temp.points[0, 0] = temp.points[1, 1] / aspect;
-            temp.points[2, 2] = far * oneOverDepth;
-            temp.points[3, 2] = (-far * near) * oneOverDepth;
-            temp.points[2, 3] = 1;
+            temp.points[2, 2] = (-near - far) / (near - far);
+            temp.points[2, 3] = 2 * (far * near) / (near - far);
+            temp.points[3, 2] = 1;
             temp.points[3, 3] = 0;
+
+
+
+            //var a = Matrix4x4.CreatePerspectiveFieldOfView(fov, aspect, near, far);
+            //temp.points = new float[,] { { a.M11, a.M12, a.M13, a.M14 }, { a.M21, a.M22, a.M23, a.M24 }, { a.M31, a.M32, a.M33, a.M44 }, { a.M41, a.M42, a.M43, a.M44 } };
 
             return temp;
         }

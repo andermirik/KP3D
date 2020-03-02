@@ -320,7 +320,7 @@ namespace KP3D.Scene
 
             for (int scanlineY = (int)a.Y; scanlineY <= b.Y; scanlineY++)
             {
-                DrawLine((int)curx1 + bd.Width / 2, scanlineY + bd.Height / 2, zLeft, (int)curx2 + bd.Width / 2, scanlineY + bd.Height / 2, zRight, clr, pixels, bd, BytesPerPixel, zBuffer);
+                DrawLine((int)curx1 + bd.Width / 2, scanlineY + bd.Height / 2, zLeft, (int)curx2 + bd.Width / 2, scanlineY + bd.Height / 2, zRight, clr, pixels, bd, BytesPerPixel, zBuffer, null, -1);
 
                 curx1 += invslope1;
                 curx2 += invslope2;
@@ -346,7 +346,7 @@ namespace KP3D.Scene
 
             for (int scanlineY = (int)c.Y; scanlineY > a.Y; scanlineY--)
             {
-                DrawLine((int)currentX1+bd.Width/2, scanlineY + bd.Height / 2, leftZ, (int)currentX2 + bd.Width / 2, scanlineY + bd.Height / 2, rightZ, clr, pixels, bd, BytesPerPixel, zBuffer);
+                DrawLine((int)currentX1+bd.Width/2, scanlineY + bd.Height / 2, leftZ, (int)currentX2 + bd.Width / 2, scanlineY + bd.Height / 2, rightZ, clr, pixels, bd, BytesPerPixel, zBuffer, null, -1);
                 currentX1 -= slope1;
                 currentX2 -= slope2;
 
@@ -391,7 +391,7 @@ namespace KP3D.Scene
             }
         }
 
-        public static void DrawLine(int x0, int y0, double z0, int x1, int y1, double z1, System.Drawing.Color clr, byte[] pixels, BitmapData bd, int BytesPerPixel, float[] zBuffer = null)
+        public static void DrawLine(int x0, int y0, double z0, int x1, int y1, double z1, System.Drawing.Color clr, byte[] pixels, BitmapData bd, int BytesPerPixel, float[] zBuffer, int[] id_object_in_pixel, int id)
         {
             var steep = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
             if (steep)
@@ -448,6 +448,8 @@ namespace KP3D.Scene
                             {
                                 zBuffer[index] = (float)z;
                                 shouldBeDrawn = true;
+                                if(id_object_in_pixel != null)
+                                    id_object_in_pixel[index] = id;
                             }
                         }
                     }
@@ -479,7 +481,7 @@ namespace KP3D.Scene
             }
         }
 
-        public static void AndYetAnotherMemesSavedTheWorld(Vector3 v1, Vector3 v2, Vector3 v3, System.Drawing.Color clr, float[] zBuffer, byte[] pixels, BitmapData bd, int BytesPerPixel)
+        public static void AndYetAnotherMemesSavedTheWorld(Vector3 v1, Vector3 v2, Vector3 v3, System.Drawing.Color clr, float[] zBuffer, byte[] pixels, BitmapData bd, int BytesPerPixel, int[] id_object_in_pixel, int id)
         {
             Vector2 min = new Vector2(Math.Min(v1.X, Math.Min(v2.X, v3.X)), Math.Min(v1.Y, Math.Min(v2.Y, v3.Y)));
             Vector2 max = new Vector2(Math.Max(v1.X, Math.Max(v2.X, v3.X)), Math.Max(v1.Y, Math.Max(v2.Y, v3.Y)));
@@ -521,7 +523,7 @@ namespace KP3D.Scene
                     else
                     { pStart = intersections[1]; pEnd = intersections[0]; }
 
-                    DrawLine((int)pStart.X, (int)pStart.Y, pStart.Z, (int)pEnd.X, (int)pEnd.Y, pEnd.Z, clr, pixels, bd, BytesPerPixel, zBuffer);
+                    DrawLine((int)pStart.X, (int)pStart.Y, pStart.Z, (int)pEnd.X, (int)pEnd.Y, pEnd.Z, clr, pixels, bd, BytesPerPixel, zBuffer, id_object_in_pixel, id);
                 }
 
             }
