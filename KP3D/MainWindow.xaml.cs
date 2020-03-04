@@ -40,64 +40,8 @@ namespace KP3D
         public MainWindow()
         {
             InitializeComponent();
-            Scene.Camera camera = new Scene.Camera(new Vector3(0, 10, 200), fov);
+            Scene.Camera camera = new Scene.Camera(new Vector3(0, 0, 200), fov);
             scene = new Scene.Scene(camera);
-            Shapes.IcoSphere fig = new Shapes.IcoSphere(3);
-            fig.dx = 200;
-            fig.dy = -50;
-            fig.dz = 1;
-            fig.scale_x = 100;
-            fig.scale_y = 100;
-            fig.scale_z = 100;
-            fig.main_clr = Render.color(153, 153, 255);
-            fig.select_clr = Render.color(204, 204, 255);
-
-            Shapes.Box fig2 = new Shapes.Box();
-            fig2.dx = 50;
-            fig2.dy = -50;
-            fig2.dz = 1;
-            fig2.scale_x = 200;
-            fig2.scale_y = 100;
-            fig2.scale_z = 100;
-            fig2.main_clr = Render.color(153, 153, 255);
-            //fig2.select_clr = Render.color(204, 204, 255);
-
-            Shapes.Toroid fig3 = new Shapes.Toroid();
-            fig3.dx = -100;
-            fig3.dy = -150;
-            fig3.dz = 1;
-            fig3.scale_x = 100;
-            fig3.scale_y = 100;
-            fig3.scale_z = 100;
-            fig3.main_clr = Render.color(153, 153, 255);
-            //fig3.select_clr = Render.color(204, 204, 255);
-
-            Shapes.Conus fig4 = new Shapes.Conus();
-            fig4.dx = -100;
-            fig4.dy = 50;
-            fig4.dz = 1;
-            fig4.scale_x = 100;
-            fig4.scale_y = 100;
-            fig4.scale_z = 100;
-            fig4.main_clr = Render.color(153, 153, 255);
-            //fig4.select_clr = Render.color(204, 204, 255);
-
-            Shapes.Cylinder fig5 = new Shapes.Cylinder();
-            fig5.dx = -100;
-            fig5.dy = -150;
-            fig5.dz = 1;
-            fig5.scale_x = 100;
-            fig5.scale_y = 100;
-            fig5.scale_z = 100;
-
-            fig5.main_clr = Render.color(153, 153, 255);
-            //fig5.select_clr = Render.color(204, 204, 255);
-
-            //scene.shapes.Add(fig);
-            //scene.shapes.Add(fig2);
-            //scene.shapes.Add(fig3);
-            //scene.shapes.Add(fig4);
-            //scene.shapes.Add(fig5);
 
             SceneView.Source = BitmapToImageSource(scene.render(width, height, is_lines.IsChecked ?? false));
 
@@ -332,9 +276,9 @@ namespace KP3D
                 dx = -1f * coef; 
             else if (e.Key == Key.D)
                 dx = 1f * coef; 
-            else if (e.Key == Key.Space)
+            else if (e.Key == Key.U)
                 dy = 1f * coef; 
-            else if (e.Key == Key.LeftShift)
+            else if (e.Key == Key.J)
                 dy = -1f * coef;
             else if (e.Key == Key.Delete)
             {
@@ -346,10 +290,9 @@ namespace KP3D
                 }
             }
             scene.camera.eye = new Vector3(scene.camera.eye.X + dx, scene.camera.eye.Y + dy, scene.camera.eye.Z+dz);
+            Debug.WriteLine(scene.camera.eye);
             SceneView.Source = BitmapToImageSource(scene.render(width, height, is_lines.IsChecked ?? false));
         }
-
-
 
         private void selecter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -500,57 +443,115 @@ namespace KP3D
 
         private void tbdx_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(tbdx.Text!="")
-                dx_slider.Value = float.Parse(tbdx.Text);
-        }
+            try
+            {
+                if (tbdx.Text != "")
+                    dx_slider.Value = float.Parse(tbdx.Text);
+            }
+            catch (Exception)
+            {
+
+            };
+}
 
         private void tbdy_TextChanged(object sender, TextChangedEventArgs e)
         {
+            try { 
             if (tbdy.Text != "")
                 dy_slider.Value = float.Parse(tbdy.Text);
+            }
+            catch (Exception)
+            {
+
+            };
         }
 
         private void tbdz_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbdz.Text != "")
-                dz_slider.Value = float.Parse(tbdz.Text);
+            try
+            {
+                if (tbdz.Text != "")
+                    dz_slider.Value = float.Parse(tbdz.Text);
+            }
+            catch (Exception) { 
+            
+            };
         }
 
         private void tbsx_TextChanged(object sender, TextChangedEventArgs e)
         {
+            try { 
             if (tbsx.Text != "")
                 scx_slider.Value = float.Parse(tbsx.Text);
+            }
+            catch (Exception)
+            {
+
+            };
         }
 
         private void tbsy_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbsy.Text != "")
-                scy_slider.Value = float.Parse(tbsy.Text);
-        }
+            try
+            {
+                if (tbsy.Text != "")
+                    scy_slider.Value = float.Parse(tbsy.Text);
+            }
+            catch (Exception)
+            {
+
+            };
+}
 
         private void tbsz_TextChanged(object sender, TextChangedEventArgs e)
         {
+            try { 
             if (tbsz.Text != "")
                 scz_slider.Value = float.Parse(tbsz.Text);
+            }
+            catch (Exception)
+            {
+
+            };
         }
 
         private void tbrx_TextChanged(object sender, TextChangedEventArgs e)
         {
+            try { 
             if (tbrx.Text != "")
                 rx_slider.Value = float.Parse(tbrx.Text);
+            }
+            catch (Exception)
+            {
+
+            };
         }
 
         private void tbry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbry.Text != "")
-                ry_slider.Value = float.Parse(tbry.Text);
+            try
+            {
+                if (tbry.Text != "")
+                    ry_slider.Value = float.Parse(tbry.Text);
+            }
+            catch (Exception)
+            {
+
+            };
         }
 
         private void tbrz_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tbrz.Text != "")
-                rz_slider.Value = float.Parse(tbrz.Text);
-        }
+            try
+            {
+                if (tbrz.Text != "")
+                    rz_slider.Value = float.Parse(tbrz.Text);
+            }
+            catch (Exception)
+            {
+
+            };
+}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

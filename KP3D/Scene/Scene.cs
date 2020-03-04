@@ -79,11 +79,19 @@ namespace KP3D.Scene
                 var W = TL * Rot * Scale;
 
                 var V = MyMath.MyMatrix4x4.CreateFPSLookAt(camera.eye, camera.pitch, camera.yaw);
-                var P = MyMath.MyMatrix4x4.CreateProjectionFOV(camera.fov, width / height, 0.01f, 100);
+                //var V = MyMath.MyMatrix4x4.CreateLookAt(camera.eye, new Vector3(0, 0, 0), new Vector3(0, 1, 0));
                 
+                float far = 100;
+                float near = 0.01f;
 
-                var WVP = P * V * W;
+                float A = 1 / (float)Math.Tan(camera.fov * 0.5f);
+                float B = 1 / (float)Math.Tan(camera.fov * 0.5f);
+                float C = far / (far - near);
+                float D = -1;
+                float E = near * far / (far - near);
 
+                //var P = MyMath.MyMatrix4x4.CreateProjectionFOV(camera.fov, (float)width / (float)height, near, far);
+                var P = MyMath.MyMatrix4x4.CreateProjectionFOV(A, B, C, D, E);
                 Object _lock = new Object();
                 Parallel.For(0, shapes[i].triangles.Count, new ParallelOptions { MaxDegreeOfParallelism = 16 }, j =>
                 //for (int j = 0; j < shapes[i].triangles.Count; j++)
@@ -92,9 +100,10 @@ namespace KP3D.Scene
                     var p1 = MyMath.MyMatrix4x1.FromPoint4x1(shapes[i].triangles[j].b);
                     var p2 = MyMath.MyMatrix4x1.FromPoint4x1(shapes[i].triangles[j].c);
 
-                    var t1 = MyMath.MyMatrix4x1.ToPoint(WVP * p0);
-                    var t2 = MyMath.MyMatrix4x1.ToPoint(WVP * p1);
-                    var t3 = MyMath.MyMatrix4x1.ToPoint(WVP * p2);
+                    var t1 = MyMath.MyMatrix4x1.ToPoint(P * V * W * p0, A, B, C, D, E, width, height);
+                    var t2 = MyMath.MyMatrix4x1.ToPoint(P * V * W * p1, A, B, C, D, E, width, height);
+                    var t3 = MyMath.MyMatrix4x1.ToPoint(P * V * W * p2, A, B, C, D, E, width, height);
+
 
                     var intensivity = 0.5 + 0.5 * Math.Abs(shapes[i].triangles[j].normal.Normalize().Z);
                     if (intensivity.IsNaN())
