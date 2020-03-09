@@ -104,11 +104,6 @@ namespace KP3D.Shapes
                 Vector3 v = new Vector3(_a/3, _b/3, _c/3);
 
                 triangles[i].normal = (triangles[i].c - v).Cross(triangles[i].a - v);
-               
-                //одна вершина 
-                //triangles[i].normal = (triangles[i].c - triangles[i].b).Cross(triangles[i].a - triangles[i].b).Normalize();
-                //if (triangles[i].normal.Y < 0) //or whatever direction up is
-                 //   triangles[i].normal = -triangles[i].normal;
             }
         }
     }

@@ -9,6 +9,7 @@ namespace KP3D.Scene
     class Camera
     {
         public Vector3 eye;
+        public Vector3 center = Vector3.MinValue;
         public float fov;
 
         public Camera(Vector3 eye, float fov)

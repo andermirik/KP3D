@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         KeyDown="SceneView_KeyDown"
-        Title="3D Graphics sample" Height="600" Width="800"  FontSize="14" FontStyle="Normal" FontWeight="Normal">
+        Title="3D Graphics sample" Height="600" Width="1050"  FontSize="14" FontStyle="Normal" FontWeight="Normal">
     <Grid>
         <DockPanel LastChildFill="True">
             <Grid DockPanel.Dock="Right" Width="250px" Background="Black">
@@ -69,6 +69,58 @@
                 <Button Content="Сохранить" Style="{DynamicResource MyButtonStyle}" HorizontalAlignment="Left" Margin="10,0,0,10" Width="110" Background="White" Height="33" VerticalAlignment="Bottom" Name="Save" Click="Save_Click"/>
                 <Button Content="Загрузить" Style="{DynamicResource MyButtonStyle}" HorizontalAlignment="Left" Margin="130,0,0,10" Width="110" Background="White" Height="33" VerticalAlignment="Bottom" Name="Load" Click="Load_Click"/>
             </Grid>
+            <Grid DockPanel.Dock="Left" Width="250px" Background="Black">
+                <Grid Margin="10,129,10,0" Background="#FF342D2D" Height="50" VerticalAlignment="Top">
+                    <ComboBox Name="group_selecter" SelectionChanged="group_selecter_SelectionChanged" Style="{DynamicResource ComboBoxFlatStyle}" Margin="10,10,10,10" Background="Black"/>
+                </Grid>
+                <Grid Margin="10,187,10,0" Background="#FF342D2D" Height="367" VerticalAlignment="Top">
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="10,56,197,0" Text="dx" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="9,80,197,0" Text="dy" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="9,101,197,0" Text="dz" TextWrapping="NoWrap"  VerticalAlignment="Top" />
+                    <Slider Name="dx_slider2" HorizontalAlignment="Center" Margin="0,57,0,0" VerticalAlignment="Top" Width="150" Minimum="-500" Maximum="500" ValueChanged="dx_slider_ValueChanged2"/>
+                    <TextBox Name="tbdx2" Margin="183,56,10,0" Text="0" VerticalAlignment="Top" TextWrapping="NoWrap" AcceptsReturn="False" TextChanged="tbdx_TextChanged2"/>
+                    <Slider Name="dy_slider2" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" Width="150" Minimum="-500" Maximum="500" ValueChanged="dy_slider_ValueChanged2"/>
+                    <TextBox Name="tbdy2"  Margin="183,79,10,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" AcceptsReturn="False" TextChanged="tbdy_TextChanged2"/>
+                    <Slider Name="dz_slider2" HorizontalAlignment="Center" Margin="0,102,0,0" VerticalAlignment="Top" Width="150" Minimum="-500" Maximum="500" ValueChanged="dz_slider_ValueChanged2"/>
+                    <TextBox Name="tbdz2"  Margin="183,102,10,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" AcceptsReturn="False" TextChanged="tbdz_TextChanged2"/>
+
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="11,129,196,0" Text="sx" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="10,152,196,0" Text="sy" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="10,0,196,0" Text="sz" TextWrapping="NoWrap" Height="19" VerticalAlignment="Center"/>
+                    <Slider Name="scx_slider2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" Minimum="-10" Maximum="10" ValueChanged="scx_slider_ValueChanged2" Margin="0,128,0,0"/>
+                    <TextBox Name="tbsx2"  Margin="184,128,9,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" TextChanged="tbsx_TextChanged2"/>
+                    <Slider Name="scy_slider2" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top" Width="150" Minimum="-10" Maximum="10" ValueChanged="scy_slider_ValueChanged2"/>
+                    <TextBox Name="tbsy2" Margin="184,152,9,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" TextChanged="tbsy_TextChanged2"/>
+                    <Slider Name="scz_slider2" HorizontalAlignment="Center" Margin="0,178,0,0" VerticalAlignment="Top" Width="150" Minimum="-10" Maximum="10" ValueChanged="scz_slider_ValueChanged2"/>
+                    <TextBox Name="tbsz2" Margin="184,177,9,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" TextChanged="tbsz_TextChanged2"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="11,204,196,0" Text="rx" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="10,228,196,0" Text="ry" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="10,249,196,0" Text="rz" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <Slider Name="rx_slider2" HorizontalAlignment="Center" Margin="0,205,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="6.2832" ValueChanged="rx_slider_ValueChanged2"/>
+                    <TextBox Name="tbrx2" Margin="184,204,9,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" TextChanged="tbrx_TextChanged2"/>
+                    <Slider Name="ry_slider2" HorizontalAlignment="Center" Margin="0,229,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="6.2832" ValueChanged="ry_slider_ValueChanged2"/>
+                    <TextBox Name="tbrz2" Margin="184,254,9,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" TextChanged="tbrz_TextChanged2"/>
+                    <Slider  Name="rz_slider2" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" Width="150" Minimum="0" Maximum="6.2832" ValueChanged="rz_slider_ValueChanged2"/>
+                    <TextBox Name="tbry2" Margin="184,229,9,0" Text="0" TextWrapping="NoWrap" VerticalAlignment="Top" TextChanged="tbry_TextChanged2"/>
+
+                    <Button Content="Новая" Style="{DynamicResource MyButtonStyle}" HorizontalAlignment="Left" Margin="30,0,0,10" Width="80" Background="#FFC52E2E" Height="33" VerticalAlignment="Bottom" Click="Button_Click_6" Foreground="White" BorderBrush="White"/>
+                    <Button Content="Удалить" Style="{DynamicResource MyButtonStyle}" Margin="0,0,35,10" Background="White" Height="33" VerticalAlignment="Bottom" Click="Button_Click_7" HorizontalAlignment="Right" Width="80"/>
+                    <TextBox Name="gname" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="59,11,0,0" Text="-1 - undefined" TextWrapping="NoWrap" VerticalAlignment="Top" Width="161" Height="26" TextChanged="gname_TextChanged"/>
+                    <TextBlock  Foreground="#FFE8E5E5" Margin="10,15,181,0" Text="Имя" TextWrapping="NoWrap" VerticalAlignment="Top"/>
+                    <Button Name="SaveGroup" Content="Сохранить" Style="{DynamicResource MyButtonStyle}" HorizontalAlignment="Left" Margin="30,0,0,48" Width="80" Background="White" Height="33" VerticalAlignment="Bottom" Click="SaveGroup_Click" />
+                    <Button Name="LoadGroup"  Content="Загрузить" Style="{DynamicResource MyButtonStyle}" Margin="0,0,35,48" Background="White" Height="33" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Width="80" Click="LoadGroup_Click"/>
+                </Grid>
+                <Grid Margin="10,10,10,0" Background="#FF342D2D" Height="90" VerticalAlignment="Top">
+                    <Slider Margin="125,10,10,0" VerticalAlignment="Top" Minimum="0.1" Maximum="3.14" Value="1.963"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,9,0,0" Text="Угол обзора" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <Slider Margin="125,0,10,0" VerticalAlignment="Center" Minimum="0" Maximum="100" Value="0.1"/>
+                    <Slider Margin="125,62,10,0" VerticalAlignment="Top" Minimum="100" Maximum="1000" Value="1000"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0"  Text="Близкая секущая" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,59,0,0" Text="Дальняя секущая" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                </Grid>
+                <TextBlock HorizontalAlignment="Left" Margin="10,105,0,0" Text="Группы объектов" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFE8E5E5"/>
+
+            </Grid>
             <Grid>
                 <Image Name="SceneView" Source="cat.jpg" Stretch="None" MouseDown="SceneView_MouseDown" MouseWheel="SceneView_MouseWheel" MouseMove="SceneView_MouseMove" RenderTransformOrigin="0.5,0.5" Margin="0,80,0,0" HorizontalAlignment="Center" Width="550" Height="508" VerticalAlignment="Top">
                     <Image.RenderTransform>
@@ -82,10 +134,27 @@
 
                 </Image>
                 <Grid Height="80" VerticalAlignment="Top" Background="Black">
-                    <Grid Margin="10,31,0,10" Background="#FF342D2D">
+                    <Grid Margin="0,31,0,10" Background="#FF342D2D">
                         <CheckBox Name ="is_rotating" IsChecked="True"  Content="Вращать сцену"   Foreground="#FFE5E5E5" Margin="399,0,0,0" VerticalAlignment="Center"  HorizontalAlignment="Left" Width="124" FontStyle="Normal"/>
+                        <TextBox Name="eye_x"  HorizontalAlignment="Left" Margin="36,0,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="37"/>
+                        <TextBox Name="eye_y" HorizontalAlignment="Left" Margin="78,0,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="37"/>
+                        <TextBox Name="eye_z" HorizontalAlignment="Left" Margin="120,0,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="37"/>
+                        <TextBox Name="dir_x" HorizontalAlignment="Left" Margin="192,0,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="37"/>
+                        <TextBox Name="dir_y" HorizontalAlignment="Left" Margin="234,0,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="37"/>
+                        <TextBox Name="dir_z" HorizontalAlignment="Left" Margin="276,0,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Center" Width="37"/>
+                        <Button TextBlock.FontSize="12px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="Look" Style="{DynamicResource MyButtonStyle}" HorizontalAlignment="Left" Margin="318,0,0,0" VerticalAlignment="Center" Height="23" Width="45" Background="White" Click="Button_Click_5"/>
+                        <Image Margin="10,7,0,7" Stretch="Fill" Source="/icons8_eye_128px.png" HorizontalAlignment="Left" Width="21"/>
+                        <Image Margin="164,9,0,5" Stretch="Fill" Source="/icons8_opera_glasses_64px.png" RenderTransformOrigin="0.278,-0.419" HorizontalAlignment="Left" Width="25"/>
                     </Grid>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,5,0,0" Text="Я еще не придумал что сюда засунуть" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFE8E5E5"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,5,0,0" Text="Я еще не придумал что сюда засунуть" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFE8E5E5"/>
+                    <ComboBox Style="{DynamicResource ComboBoxFlatStyle}" Margin="408,1,0,53" Background="Black">
+                        <ComboBoxItem >
+                            Перспективная
+                        </ComboBoxItem>
+                        <ComboBoxItem Selector.IsSelected="True">
+                            Параллельная
+                        </ComboBoxItem>
+                    </ComboBox>
                 </Grid>
             </Grid>
         </DockPanel>

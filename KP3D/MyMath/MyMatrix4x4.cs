@@ -100,41 +100,6 @@ namespace KP3D.MyMath
             return view;// * MyMath.MyMatrix4x4.CreateTranslation(eye.X, eye.Y, eye.Z);
         }
 
-        public static MyMatrix4x4 CreateJRALookAt(Vector3 eye, Vector3 center, Vector3 up)
-        {
-            //MyMatrix4x4 matrixInverted = MyMatrix4x4.CreateTranslation(-eye.X, -eye.Y, -eye.Z);
-
-            //var w = new Vector3(center.X - eye.X, center.Y - eye.Y, center.Z - center.Z);
-
-            //var u = up.Cross(w);
-            //up = u.Cross(w);
-
-            //u = u.Normalize();
-            //up = up.Normalize();
-            //w = w.Normalize();
-
-            var camMatrix = new MyMatrix4x4();
-
-            //camMatrix.points[0, 0] = u.X;
-            //camMatrix.points[0, 1] = u.Y;
-            //camMatrix.points[0, 2] = u.Z;
-
-            //camMatrix.points[1, 0] = up.X;
-            //camMatrix.points[1, 1] = up.Y;
-            //camMatrix.points[1, 2] = up.Z;
-
-            //camMatrix.points[2, 0] = w.X;
-            //camMatrix.points[2, 1] = w.Y;
-            //camMatrix.points[2, 2] = w.Z;
-
-            //camMatrix = camMatrix * matrixInverted;
-
-            //return camMatrix;
-            var a = Matrix4x4.CreateLookAt(eye, center, up);
-            camMatrix.points = new float[,] { { a.M11, a.M12, a.M13, a.M14 }, { a.M21, a.M22, a.M23, a.M24 }, { a.M31, a.M32, a.M33, a.M44 }, { a.M41, a.M42, a.M43, a.M44 } };
-            return camMatrix;
-        }
-
         public static MyMatrix4x4 CreateLookAt(Vector3 eye, Vector3 center, Vector3 up)
         {
             Vector3 zaxis = (eye - center).Normalize();    // The "forward" vector.
@@ -158,17 +123,6 @@ namespace KP3D.MyMath
             return view;
         }
 
-        MyMatrix4x4 CreateArcballView(Vector3 t0, float anglex, float angley, float anglez, Vector3 t1)
-        {
-            MyMatrix4x4 T0 = CreateTranslation(t0.X, t0.Y, t0.Z); // Translation away from object.
-            MyMatrix4x4 R = CreateRotationX(anglex) * CreateRotationY(angley) * CreateRotationZ(anglez);     // Rotate around object.
-            MyMatrix4x4 T1 = CreateTranslation(t1.X, t1.Y, t1.Z); // Translate to center of object.
-
-            //MyMatrix4x4 viewMatrix = (T1 * R * T0).;
-
-            // return viewMatrix;
-            return null;
-        }
         public static MyMatrix4x4 CreateProjection(float left, float right, float bottom, float top, float near, float far)
         {
             MyMatrix4x4 temp = new MyMatrix4x4();

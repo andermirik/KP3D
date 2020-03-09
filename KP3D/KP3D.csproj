@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <None Remove="cat.jpg" />
+    <None Remove="icons8_eye_128px.png" />
+    <None Remove="icons8_opera_glasses_64px.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +21,8 @@
 
   <ItemGroup>
     <Resource Include="cat.jpg" />
+    <Resource Include="icons8_eye_128px.png" />
+    <Resource Include="icons8_opera_glasses_64px.png" />
   </ItemGroup>
 
   <ItemGroup>
