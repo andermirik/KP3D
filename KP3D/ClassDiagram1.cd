@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="KP3D.MyMath.MyMatrix4x4" Collapsed="true">
+    <Position X="4.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAEIAAAgAAIAAAAAACAACAACIBAECAAAAAAAE=</HashCode>
+      <FileName>MyMath\MyMatrix4x4.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.MyMath.MyMatrix4x1" Collapsed="true">
+    <Position X="3" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAKAAAAAAAAAIAAAAAAAAACAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>MyMath\MyMatrix4x4.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Scene.Camera" Collapsed="true">
+    <Position X="3" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAQAAAAAAAAAwAAAAABAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scene\Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Scene.GroupShapes" Collapsed="true">
+    <Position X="4.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAEAAAQAIAGAAAADwA=</HashCode>
+      <FileName>Scene\GroupShapes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Scene.Render" Collapsed="true">
+    <Position X="3" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEBAAAAAAAAAAAAAAAAAAAAABAACAAEAAAAAAAAA=</HashCode>
+      <FileName>Scene\Render.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Scene.Scene" Collapsed="true">
+    <Position X="4.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAgAAAgUAQAAAAAAABAAAAAAAAAAAAAAUQAA=</HashCode>
+      <FileName>Scene\Scene.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Scene.Shape" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAQAAgAABAAAQAIAGQAAADwA=</HashCode>
+      <FileName>Scene\Shape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Shapes.Box" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\Box.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Shapes.Conus" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\Conus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Shapes.Cylinder" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\Cylinder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Shapes.IcoSphere" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\IcoSphere.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Shapes.Toroid" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shapes\Toroid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.Shapes.MyTriangle" Collapsed="true">
+    <Position X="6.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAIAAAACgAQAAAAAAAAA=</HashCode>
+      <FileName>Shapes\Triangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EarClipperLib.DynamicProperties" Collapsed="true">
+    <Position X="1.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAIAAAEAAAAAAEAAQAAAAAABAIAAAAAABAAAA=</HashCode>
+      <FileName>trlib\DynamicProperties.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EarClipperLib.EarClipping" Collapsed="true">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAgAIAAgAAgAAQgAAAAGQgAMAIABQAAAAgAAAABEA=</HashCode>
+      <FileName>trlib\EarClipping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EarClipperLib.Candidate" Collapsed="true">
+    <Position X="4.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAACgAAAA=</HashCode>
+      <FileName>trlib\EarClipping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EarClipperLib.ConnectionEdge" Collapsed="true">
+    <Position X="6.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAABAAAAAAAAAAEgAAAAAAAAAAAAMAAAAAAAAgAACA=</HashCode>
+      <FileName>trlib\EarClipping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EarClipperLib.Polygon" Collapsed="true">
+    <Position X="1.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAACAAAAAAAAAABAAAAAAAAgAAAAAAAAAQAAA=</HashCode>
+      <FileName>trlib\EarClipping.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EarClipperLib.Misc" Collapsed="true">
+    <Position X="1.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAQQAIAAAAAAAAAAAA=</HashCode>
+      <FileName>trlib\Misc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EarClipperLib.Vector3m" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAASAAAAAAAAE4IUAAABDCQAAAIIAgCCgACBAYDE=</HashCode>
+      <FileName>trlib\Vector3m.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="KP3D.App" Collapsed="true">
+    <Position X="1.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KP3D.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAImMCBAIQAFSBSASABwA4WkBgAAAjRCCECACASAARU=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Enum Name="EarClipperLib.PropertyConstants" Collapsed="true">
+    <Position X="1.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgQAAAAAAAAAIAAAAAQAAAAQ=</HashCode>
+      <FileName>trlib\DynamicProperties.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

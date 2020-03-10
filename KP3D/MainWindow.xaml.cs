@@ -818,23 +818,47 @@ namespace KP3D
                     fs.WriteLine(scene.camera.fov);
                     fs.WriteLine(scene.camera.pitch);
                     fs.WriteLine(scene.camera.yaw);
-                    //for (int i = 0; i < scene.shapes.Count; i++)
-                    //{
-                    //    fs.WriteLine(scene.shapes[i].type);
+                    for (int g = 0; g < scene.groups.Count; g++)
+                    {
+                        fs.WriteLine("__group__");
+                        fs.WriteLine(scene.groups[g].name);
 
-                    //    fs.WriteLine(scene.shapes[i].dx);
-                    //    fs.WriteLine(scene.shapes[i].dy);
-                    //    fs.WriteLine(scene.shapes[i].dz);
+                        fs.WriteLine(scene.groups[g].dx);
+                        fs.WriteLine(scene.groups[g].dy);
+                        fs.WriteLine(scene.groups[g].dz);
 
-                    //    fs.WriteLine(scene.shapes[i].scale_x);
-                    //    fs.WriteLine(scene.shapes[i].scale_y);
-                    //    fs.WriteLine(scene.shapes[i].scale_z);
+                        fs.WriteLine(scene.groups[g].scale_x);
+                        fs.WriteLine(scene.groups[g].scale_y);
+                        fs.WriteLine(scene.groups[g].scale_z);
 
-                    //    fs.WriteLine(scene.shapes[i].rotation_x);
-                    //    fs.WriteLine(scene.shapes[i].rotation_y);
-                    //    fs.WriteLine(scene.shapes[i].rotation_z);
-                    //    fs.WriteLine(scene.shapes[i].main_clr.R + " " + scene.shapes[i].main_clr.G + " " + scene.shapes[i].main_clr.B);
-                    //}
+                        fs.WriteLine(scene.groups[g].rotation_x);
+                        fs.WriteLine(scene.groups[g].rotation_y);
+                        fs.WriteLine(scene.groups[g].rotation_z);
+
+                        for (int i = 0; i < scene.groups[g].shapes.Count; i++)
+                        {
+                            fs.WriteLine(scene.groups[g].shapes[i].type);
+
+                            fs.WriteLine(scene.groups[g].shapes[i].dx);
+                            fs.WriteLine(scene.groups[g].shapes[i].dy);
+                            fs.WriteLine(scene.groups[g].shapes[i].dz);
+
+                            fs.WriteLine(scene.groups[g].shapes[i].scale_x);
+                            fs.WriteLine(scene.groups[g].shapes[i].scale_y);
+                            fs.WriteLine(scene.groups[g].shapes[i].scale_z);
+
+                            fs.WriteLine(scene.groups[g].shapes[i].rotation_x);
+                            fs.WriteLine(scene.groups[g].shapes[i].rotation_y);
+                            fs.WriteLine(scene.groups[g].shapes[i].rotation_z);
+                            fs.WriteLine(
+                                scene.groups[g].shapes[i].main_clr.R
+                                + " "
+                                + scene.groups[g].shapes[i].main_clr.G
+                                + " "
+                                + scene.groups[g].shapes[i].main_clr.B
+                                );
+                        }
+                    }
                 }
             }
         }
@@ -847,7 +871,7 @@ namespace KP3D
             lfd.ShowDialog();
             if (lfd.FileName != "")
             {
-                //scene.shapes.Clear();
+                scene.groups.Clear();
                 using (StreamReader fs = new StreamReader(lfd.FileName))
                 {
                     string line;
@@ -862,6 +886,24 @@ namespace KP3D
                     {
                         if (line != "")
                         {
+                            if (line == "__group__")
+                            {
+                                scene.groups.Add(new GroupShapes());
+                                scene.groups[scene.groups.Count - 1].name = fs.ReadLine();
+
+                                scene.groups[scene.groups.Count - 1].dx = float.Parse(fs.ReadLine());
+                                scene.groups[scene.groups.Count - 1].dy = float.Parse(fs.ReadLine());
+                                scene.groups[scene.groups.Count - 1].dz = float.Parse(fs.ReadLine());
+
+                                scene.groups[scene.groups.Count - 1].scale_x = float.Parse(fs.ReadLine());
+                                scene.groups[scene.groups.Count - 1].scale_y = float.Parse(fs.ReadLine());
+                                scene.groups[scene.groups.Count - 1].scale_z = float.Parse(fs.ReadLine());
+
+                                scene.groups[scene.groups.Count - 1].rotation_x = float.Parse(fs.ReadLine());
+                                scene.groups[scene.groups.Count - 1].rotation_y = float.Parse(fs.ReadLine());
+                                scene.groups[scene.groups.Count - 1].rotation_z = float.Parse(fs.ReadLine());
+                                continue;
+                            }
                             Scene.Shape shape = new Scene.Shape();
                             if (line == "Box")
                             {
@@ -898,14 +940,13 @@ namespace KP3D
 
                             var clr = fs.ReadLine().Split(" ");
                             shape.main_clr = Render.color(int.Parse(clr[0]), int.Parse(clr[1]), int.Parse(clr[2]));
-                            //scene.shapes.Add(shape);
+                            scene.groups[scene.groups.Count - 1].shapes.Add(shape);
                         }
                     }
                     RefreshComboBox();
                 }
             }
         }
-
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
             float feye_x = float.Parse(eye_x.Text);
